@@ -11,7 +11,7 @@ module.exports = {
         id: uuidv4(),
         name: 'Daniel Azevedo Guimarães',
         email: 'danielazevedo2k12@gmail.com',
-        password: setPassword('asaasasass'),
+        password: setPassword('admin123'),
         created_at: (new Date()).toLocaleString(CON_LANG, { timeZone: DATE_TIME_ZONE }),
         updated_at: (new Date()).toLocaleString(CON_LANG, { timeZone: DATE_TIME_ZONE }),
      }], {});
