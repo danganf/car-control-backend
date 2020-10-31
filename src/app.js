@@ -1,5 +1,7 @@
 'use strict';
 
+require('express-group-routes');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -21,6 +23,8 @@ app.use(function(req, res, next) {
 
 //CARREGAR ROTAS
 app.use( '/', require('./routes/index') );
-//app.use( '/media' , require('./routes/fuel') );
+app.group("/api/v1", (router) => {
+    router.use( '/fuel' , require('./routes/fuel') ); 
+});
 
 module.exports = app;
