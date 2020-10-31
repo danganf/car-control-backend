@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "body-parse": "^0.1.0",
+    "crypto": "^1.0.1",
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "http": "0.0.1-security",
