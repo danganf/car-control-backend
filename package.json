@@ -19,7 +19,8 @@
     "path": "^0.12.7",
     "sequelize": "^6.3.5",
     "sqlite-sync": "^0.3.9",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",

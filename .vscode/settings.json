@@ -1,3 +1,5 @@
 {
-    "workbench.settings.editor": "json"
+    "workbench.settings.editor": "json",
+    "editor.tabSize": 4,
+    "files.eol": "\r\n",
 }
