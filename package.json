@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "link-module-alias",
-    "preinstall": "command -v link-module-alias && link-module-alias clean || true",
     "start": "node ./bin/server.js",
     "watch": "set PORT=3001 && nodemon ./bin/server.js"
   },
@@ -34,6 +33,7 @@
   "_moduleAliases": {
     "~control": "./src/controllers",
     "~models": "./models",
-    "~repo": "./src/repositories"
+    "~repo": "./src/repositories",
+    "~": "./src"
   }
 }
