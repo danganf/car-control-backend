@@ -5,7 +5,7 @@
 exports.getAll = async (req, res, next) => {
     try{
         //let dataResult = await repository.getAll();
-        res.status(200).send();
+        res.status(200).send({teste: true});
     } catch(e){
         res.status(500).send({ message: "Nenhum registro localizado", data: e });
     }
