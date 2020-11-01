@@ -11,11 +11,6 @@ class FuelRepository extends BaseRepository {
         super(Fuel)
     }
     
-    async getAll() {
-        let data = [];
-        return data;
-    }
-
     /**
      * 
      * @param Array arrayData

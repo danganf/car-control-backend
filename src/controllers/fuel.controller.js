@@ -5,12 +5,20 @@ const control = require('~control/contract/base.controller');
 
 class FuelController {
     
-    async getAll(req, res, next) {
+    async get(req, res, next) {
         try{
-            let dataResult = await repository.getAll();
-            res.status(200).send(dataResult);
+            let dataResult = []
+            if( typeof req.params.id !== 'undefined' ){console.log(req.params.id)
+                dataResult = await repository.getById(req.params.id)
+            } else {
+                console.log('aaaa')
+                dataResult = await repository.getByPaginate(req)
+            }
+
+            repository.isOk() ? control.ok(res, null, dataResult) : control.notFound(res)
+
         } catch(e){
-            res.status(500).send({ message: "Nenhum registro localizado", data: e });
+            control.notFound(res)
         }
     }
 
@@ -56,26 +64,3 @@ class FuelController {
 }
 
 module.exports = new FuelController()
-
-
-// exports.getAll = async (req, res, next) => {
-//     try{
-//         let dataResult = await repository.getAll;
-//         res.status(200).send(dataResult);
-//     } catch(e){
-//         res.status(500).send({ message: "Nenhum registro localizado", data: e });
-//     }
-// }
-
-// exports.create = async (req, res, next) => {
-//     try{
-//         let dataResult = await repository.create(req.body);
-//         if( dataResult ){
-//             res.status(201).send(dataResult);
-//         } else {
-//             return baseController.fail(res, "Ocorreu um erro ao criar um registro", repository.getMsgError());
-//         }
-//     } catch(e){
-//         res.status(400).send({ message: "Ocorreu um erro ao criar um registro", data: e });
-//     }
-// }
