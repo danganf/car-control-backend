@@ -8,13 +8,11 @@ class FuelController {
     async get(req, res, next) {
         try{
             let dataResult = []
-            if( typeof req.params.id !== 'undefined' ){console.log(req.params.id)
+            if( typeof req.params.id !== 'undefined' ){
                 dataResult = await repository.getById(req.params.id)
             } else {
-                console.log('aaaa')
                 dataResult = await repository.getByPaginate(req)
             }
-
             repository.isOk() ? control.ok(res, null, dataResult) : control.notFound(res)
 
         } catch(e){

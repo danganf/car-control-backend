@@ -19,6 +19,7 @@
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "express-group-routes": "^1.1.0",
+    "express-paginate": "^1.0.2",
     "http": "0.0.1-security",
     "link-module-alias": "^1.2.0",
     "path": "^0.12.7",

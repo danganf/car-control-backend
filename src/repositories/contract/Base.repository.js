@@ -1,5 +1,7 @@
 "use restrict";
 
+const {FORMAT_RESUL,formatPaginate} = require('~/util/paginate');
+
 module.exports = class {
 
     constructor(model){
@@ -27,36 +29,33 @@ module.exports = class {
     }
     
     async getByPaginate(req) {
-        const data = {
-            items_count: 0,
-            page_count: 0,
-            pages: 0,
-            rows: []
-        }
 
-        let page = typeof req.query.page !== 'undefined' ? parseInt(req.query.page) : 1
-        let limit = typeof req.query.limit !== 'undefined' ? parseInt(req.query.limit) : 1
-
-        await this.getModel()
-        .findAndCountAll({limit: 10, offset: 0})
+        this._setDataResult(FORMAT_RESUL)
+        let limit = req.query.limit
+        return await this.getModel()
+        .findAndCountAll({
+            limit, 
+            offset: req.skip, 
+            raw: true, 
+            nest: true,
+            attributes: ['id','name','description'],
+            order: [
+                ['created_at','DESC']
+            ] // sequelize.literal("")
+        })
         .then(results => {
-            data.items_count = results.count
-            data.page_count = Math.ceil(results.count / limit)
-            data.rows = results.rows
+            this._setDataResult(results)
+            return formatPaginate(req, results)
 
-            res.render('users/all_users', {
-                users: results.rows,
-                pageCount,
-                itemCount,
-                pages: paginate.getArrayPages(req)(3, data.page_count, page)
-            });
         }).catch(err => {
             return data
         });
     }
 
     isOk(){
-        const flag = Object.keys(this._dataResult).length > 0 ? true : false
+        const flag = Object.keys(
+                        typeof this._dataResult.rows === 'undefined' ? this._dataResult : this._dataResult.rows
+                    ).length > 0 ? true : false
         this.isEmpty = !flag
         if(!flag){
             this.setNotFound()
