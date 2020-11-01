@@ -21,6 +21,7 @@
     },
     "validate":{
         "error": "Existem informações incorretadas",
+        "not-empty": "O campo {{name}} esta em branco",
         "exists": "O campo {{name}} não existe",
         "alpha-numeric": "O campo {{name}} tem que ser alphanúmerico",
         "length": "O campo {{name}} não está no tamanho esperado"
