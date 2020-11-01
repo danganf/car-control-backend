@@ -6,6 +6,10 @@ const {Fuel} = require('~models');
 const BaseRepository = require('~repo/contract/Base.repository');
 
 class FuelRepository extends BaseRepository {
+
+    constructor(){
+        super(Fuel)
+    }
     
     async getAll() {
         let data = [];
@@ -21,7 +25,7 @@ class FuelRepository extends BaseRepository {
 
         const { name, description } = arrayData
     
-        return Fuel.create({name, description})
+        return this.getModel().create({name, description})
         .then(
             (fuel) => {
                 return {id: fuel.id};
@@ -30,6 +34,31 @@ class FuelRepository extends BaseRepository {
         .catch((err) => {
             this.setMsgError(err.errors[0].message);
             return false;
+        })
+    }
+
+    async update(id, arrayData){
+        
+        return await this.getModel().findOne({
+            where: {id},
+        })
+        .then( (fuel) => {
+
+            if (!fuel) {
+                return this.setMsgError('Registro não encontrado')
+            }
+
+            const { name, description } = arrayData
+            return fuel.update({ name, description })
+            .then((c) => {
+                return c
+            })
+            .catch((err) => {
+                return this.setMsgError(err.errors[0].message);
+            })
+        })
+        .catch((err) => {
+            return this.setMsgError(err.errors[0].message);
         })
     }
 

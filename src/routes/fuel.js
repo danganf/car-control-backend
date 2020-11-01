@@ -6,6 +6,6 @@ const controller = require('~control/fuel.controller');
 
 router.get('/', controller.getAll );
 router.post('/', controller.create );
-//router.put('/:id/sold', controller.putSold );
+router.put('/:id', controller.update );
 
 module.exports = router;

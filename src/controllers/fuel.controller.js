@@ -27,6 +27,20 @@ class FuelController {
         }
     }
 
+    async update(req, res, next) {
+        try{
+            let dataResult = await repository.update(req.params.id, req.body);
+            if( dataResult ){
+                control.ok(res, dataResult, "Registro atualizado com sucesso");
+            } else {
+                control.fail(res, "Ocorreu um erro ao atualizar o registro", repository.getMsgError());
+            }
+        } catch(e){
+            console.log(e);
+            control.fail(res, "Ocorreu um erro ao atualizar o registro");
+        }
+    }
+
 }
 
 module.exports = new FuelController()
