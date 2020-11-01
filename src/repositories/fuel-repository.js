@@ -37,17 +37,42 @@ class FuelRepository extends BaseRepository {
         })
     }
 
+    /**
+     * @param integer id 
+     * @param array arrayData 
+     */
     async update(id, arrayData){
 
         try{
             const fuel = await this.getModel().findOne({where: {id}});
             if( !fuel ){
-                return this.setMsgError('Registro não encontrado');
+                return this.setNotFound();
             }
 
             const { name, description } = arrayData
             return fuel.update({ name, description })
                     .then((c) => { return c })
+                    .catch((err) => { return this.setMsgError(err.errors[0].message) })
+
+
+        } catch(e){            
+            return this.setMsgError(err.errors[0].message);
+        }
+    }
+
+    /**
+     * @param integer id 
+     */
+    async delete(id){
+
+        try{
+            const fuel = await this.getModel().findOne({where: {id}});
+            if( !fuel ){
+                return this.setNotFound();
+            }
+
+            return fuel.destroy()
+                    .then((d) => true)
                     .catch((err) => { return this.setMsgError(err.errors[0].message) })
 
 

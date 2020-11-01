@@ -2,7 +2,7 @@
 
 class BaseController {
     
-    ok(res, data=[], message, code = 200){
+    ok(res, message, data=[], code = 200){
         message = typeof message !== undefined && message !== '' && message !== null ? message : "Requisição executada com sucesso"; 
         return res.status(code).send({ message, data });
     }
