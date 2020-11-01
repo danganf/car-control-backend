@@ -2,31 +2,59 @@
 
 var exceptions = require('~/util/Exceptions');
 const {CON_LANG, DATE_TIME_ZONE} = require('~/configs/config-default');
-const {Fuel} = require('~models'); // new require for db object
-const { v4: uuidv4 } = require('uuid');
+const {Fuel} = require('~models');
+const BaseRepository = require('~repo/contract/Base.repository');
 
-exports.getAll = async () => {
+class FuelRepository extends BaseRepository {
+    
+    async getAll() {
+        let data = [];
+        return data;
+    }
 
-    let data = [];
-    return data;
-};
+    /**
+     * 
+     * @param Array arrayData
+     * @return string | boolean
+     */
+    async create(arrayData) {
 
-exports.createOrUpdate = async(arrayData) => {
+        const { name, description } = arrayData
+    
+        return Fuel.create({name, description})
+        .then(
+            (fuel) => {
+                return {id: fuel.id};
+            }
+        )
+        .catch((err) => {
+            this.setMsgError(err.errors[0].message);
+            return false;
+        })
+    }
 
-    const { name, description } = arrayData
-    console.log(Fuel);
-
-    return Fuel.create({ 
-        id: uuidv4(),
-        name, 
-        description
-    })
-    .then(
-        (fuel) => {
-            console.log(fuel);
-        }
-    )
-    .catch((err) => {
-      return err
-    })
 }
+
+module.exports = new FuelRepository()
+
+// exports.getAll = async () => {
+
+//     let data = [];
+//     return data;
+// };
+
+// exports.createOrUpdate = async(arrayData) => {
+
+//     const { name, description } = arrayData
+//     console.log(Fuel);
+
+//     return Fuel.create({name, description})
+//     .then(
+//         (fuel) => {
+//             return fuel.id;
+//         }
+//     )
+//     .catch((err) => {
+//       return err.errors[0].message
+//     })
+// }
