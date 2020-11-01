@@ -1,6 +1,7 @@
 "use restrict";
 
 const {FORMAT_RESUL,formatPaginate} = require('~/util/paginate');
+const i18n = require("i18n")
 
 module.exports = class {
 
@@ -78,7 +79,7 @@ module.exports = class {
     }
 
     setNotFound(){
-        this._msgError = `Registro não encontrado`
+        this._msgError = i18n.__('crud.not_found')
         this._statusCodeError = 404
     }
 

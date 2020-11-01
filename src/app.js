@@ -6,10 +6,22 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 const paginate = require('express-paginate')
+const i18n = require("i18n")
 const app = express()
 
+i18n.configure({
+    locales:['ptbr','en'],
+    cookie: 'gmlang',
+    queryParameter: 'lang',
+    defaultLocale: 'ptbr',
+    objectNotation: true,
+    directory: path.join(__dirname, "../locales")
+});
+
+app.use(i18n.init)
+
 // keep this before all routes that will use pagination
-app.use(paginate.middleware(20, 50));
+app.use(paginate.middleware(20, 50))
 
 app.use('/public', express.static(path.join(__dirname, 'public')))
 

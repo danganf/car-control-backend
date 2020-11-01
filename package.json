@@ -7,7 +7,7 @@
     "postinstall": "link-module-alias",
     "preinstall": "command -v link-module-alias && link-module-alias clean || true",
     "start": "node ./bin/server.js",
-    "watch": "set PORT=3001 && nodemon ./bin/server.js"
+    "watch": "set PORT=3001 && npm run postinstall && nodemon ./bin/server.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "express-group-routes": "^1.1.0",
     "express-paginate": "^1.0.2",
     "http": "0.0.1-security",
+    "i18n": "^0.13.2",
     "link-module-alias": "^1.2.0",
     "path": "^0.12.7",
     "sequelize": "^6.3.5",

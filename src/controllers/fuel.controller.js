@@ -13,6 +13,7 @@ class FuelController {
             } else {
                 dataResult = await repository.getByPaginate(req)
             }
+            
             repository.isOk() ? control.ok(res, null, dataResult) : control.notFound(res)
 
         } catch(e){
@@ -24,12 +25,12 @@ class FuelController {
         try{
             let dataResult = await repository.create(req.body);
             if( dataResult ){
-                control.ok(res, "Registro criado com sucesso", dataResult, 201);
+                control.ok(res, req.__('crud.create.yes'), dataResult, 201);
             } else {
-                control.fail(res, "Ocorreu um erro ao criar um registro", repository.getMsgError());
+                control.fail(res, req.__('crud.create.no'), repository.getMsgError());
             }
         } catch(e){
-            control.fail(res, "Ocorreu um erro ao criar um registro");
+            control.fail(res, req.__('crud.create.no') );
         }
     }
 
@@ -37,12 +38,12 @@ class FuelController {
         try{
             let dataResult = await repository.update(req.params.id, req.body);
             if( dataResult ){
-                control.ok(res, "Registro atualizado com sucesso", dataResult);
+                control.ok(res, req.__('crud.update.yes'), dataResult);
             } else {
-                control.fail(res, "Ocorreu um erro ao atualizar o registro", repository.getMsgError());
+                control.fail(res, req.__('crud.update.no'), repository.getMsgError());
             }
         } catch(e){
-            control.fail(res, "Ocorreu um erro ao atualizar o registro");
+            control.fail(res, req.__('crud.update.no'));
         }
     }
 
@@ -50,12 +51,12 @@ class FuelController {
         try{
             let dataResult = await repository.delete(req.params.id);
             if( dataResult ){
-                control.ok(res, "Registro deletado com sucesso");
+                control.ok(res, req.__('crud.delete.yes'));
             } else {
-                control.fail(res, "Ocorreu um erro ao deletar o registro", repository.getMsgError(), repository.getStatusCode());
+                control.fail(res, req.__('crud.delete.no'), repository.getMsgError(), repository.getStatusCode());
             }
         } catch(e){
-            control.fail(res, "Ocorreu um erro ao deletar o registro", repository.getStatusCode()); 
+            control.fail(res, req.__('crud.delete.no'), repository.getStatusCode()); 
         }
     }
 

@@ -1,0 +1,22 @@
+{
+	"crud": {
+		"create":{
+            "yes":"Registro criado com sucesso",
+            "no":"Ocorreu um erro ao criar um registro"
+        },
+        "update":{
+            "yes":"Registro atualizado com sucesso",
+            "no":"Ocorreu um erro ao criar um registro"
+        },
+        "delete":{
+            "yes":"Registro deletado com sucesso",
+            "no":"Ocorreu um erro ao deletar um registro"
+        },
+		"save":"Registro salvo com sucesso",
+		"not_found":"Registro não encontrado"
+	},
+    "request":{
+        "ok":"Requisição executada com sucesso",
+        "no":"Ocorreu um erro na requisição"
+    }
+}
