@@ -38,52 +38,23 @@ class FuelRepository extends BaseRepository {
     }
 
     async update(id, arrayData){
-        
-        return await this.getModel().findOne({
-            where: {id},
-        })
-        .then( (fuel) => {
 
-            if (!fuel) {
-                return this.setMsgError('Registro não encontrado')
+        try{
+            const fuel = await this.getModel().findOne({where: {id}});
+            if( !fuel ){
+                return this.setMsgError('Registro não encontrado');
             }
 
             const { name, description } = arrayData
             return fuel.update({ name, description })
-            .then((c) => {
-                return c
-            })
-            .catch((err) => {
-                return this.setMsgError(err.errors[0].message);
-            })
-        })
-        .catch((err) => {
-            return this.setMsgError(err.errors[0].message);
-        })
-    }
+                    .then((c) => { return c })
+                    .catch((err) => { return this.setMsgError(err.errors[0].message) })
 
+
+        } catch(e){            
+            return this.setMsgError(err.errors[0].message);
+        }
+    }
 }
 
 module.exports = new FuelRepository()
-
-// exports.getAll = async () => {
-
-//     let data = [];
-//     return data;
-// };
-
-// exports.createOrUpdate = async(arrayData) => {
-
-//     const { name, description } = arrayData
-//     console.log(Fuel);
-
-//     return Fuel.create({name, description})
-//     .then(
-//         (fuel) => {
-//             return fuel.id;
-//         }
-//     )
-//     .catch((err) => {
-//       return err.errors[0].message
-//     })
-// }
