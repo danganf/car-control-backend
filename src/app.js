@@ -42,6 +42,7 @@ app.use( '/', require('./routes/index') )
 app.group("/v1", (router) => {
     router.use( '/fuel' , require('./routes/fuel') )
     router.use( '/manufacture' , require('./routes/manufacture') )
+    router.use( '/type-vehicle' , require('./routes/type-vehicle') )
 })
 
 module.exports = app

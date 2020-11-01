@@ -1,6 +1,6 @@
 'use restrict';
 
-const { body, validationResult } = require('express-validator')
+const { body } = require('express-validator')
 const {validatorRequest} = require('~/util/middleware')
 const i18n = require("i18n")
 
@@ -11,10 +11,10 @@ exports.verify = [
     .isLength({min: 1 , max: 50}).withMessage(i18n.__('validate.length', {name: 'nome'}))
     .trim(),
 
-    body('description')
+    body('wheels')
     .exists().withMessage(i18n.__('validate.exists', {name: 'descrição'}))
     .notEmpty().withMessage(i18n.__('validate.not-empty', {name: 'descrição'}))
-    .isAlphanumeric().withMessage(i18n.__('validate.alpha-numeric', {name: 'descrição'}))
+    .isInt().withMessage(i18n.__('validate.integer', {name: 'descrição'}))
     .trim(),
 
     validatorRequest

@@ -24,6 +24,7 @@
         "not-empty": "O campo {{name}} esta em branco",
         "exists": "O campo {{name}} não existe",
         "alpha-numeric": "O campo {{name}} tem que ser alphanúmerico",
-        "length": "O campo {{name}} não está no tamanho esperado"
+        "length": "O campo {{name}} não está no tamanho esperado",
+        "integer": "O campo {{name}} deve ser um valor inteiro"
     }
 }
