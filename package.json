@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "link-module-alias",
+    "preinstall": "command -v link-module-alias && link-module-alias clean || true",
     "start": "node ./bin/server.js",
     "watch": "set PORT=3001 && nodemon ./bin/server.js"
   },
@@ -22,7 +23,6 @@
     "link-module-alias": "^1.2.0",
     "path": "^0.12.7",
     "sequelize": "^6.3.5",
-    "sqlite-sync": "^0.3.9",
     "sqlite3": "^5.0.0",
     "uuid": "^8.3.1"
   },
