@@ -1,12 +1,12 @@
 "use restrict";
 
-const {Fuel} = require('~models');
-const BaseRepository = require('~repo/contract/base.repository');
+const {Manufacture} = require('~models');
+const BaseRepository = require('./contract/base.repository');
 
-class FuelRepository extends BaseRepository {
+class ManufactureRepository extends BaseRepository {
 
     constructor(){
-        super(Fuel)
+        super(Manufacture)
     }
     
     /**
@@ -16,9 +16,9 @@ class FuelRepository extends BaseRepository {
      */
     async create(arrayData) {
 
-        const { name, description } = arrayData
+        const { name } = arrayData
     
-        return this.getModel().create({name, description})
+        return this.getModel().create({name, icon: null})
         .then(
             (reg) => {
                 return {id: reg.id};
@@ -42,8 +42,8 @@ class FuelRepository extends BaseRepository {
                 return this.setNotFound();
             }
 
-            const { name, description } = arrayData
-            return reg.update({ name, description })
+            const { name } = arrayData
+            return reg.update({ name, icon: null })
                     .then((c) => { return c })
                     .catch((err) => { return this.setMsgError(err.errors[0].message) })
 
@@ -61,7 +61,7 @@ class FuelRepository extends BaseRepository {
         try{
             const reg = await this.getModel().findOne({where: {id}});
             if( !reg ){
-                return this.setNotFound()
+                return this.setNotFound();
             }
 
             return reg.destroy()
@@ -70,7 +70,7 @@ class FuelRepository extends BaseRepository {
 
 
         } catch(e){            
-            return this.setMsgError(err.errors[0].message)
+            return this.setMsgError(err.errors[0].message);
         }
     }
 
@@ -79,8 +79,8 @@ class FuelRepository extends BaseRepository {
      * @param Request req 
      */
     async getByPaginate(req){
-        return super.getByPaginate(req, ['id','name','description'])
+        return super.getByPaginate(req, ['id','name','icon'])
     }
 }
 
-module.exports = new FuelRepository()
+module.exports = new ManufactureRepository()

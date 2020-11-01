@@ -29,7 +29,9 @@ module.exports = class {
         return data
     }
     
-    async getByPaginate(req) {
+    async getByPaginate(req, arrayFields,arrayOrderBy) {
+
+        arrayOrderBy = arrayOrderBy || ['created_at','DESC']
 
         this._setDataResult(FORMAT_RESUL)
         let limit = req.query.limit
@@ -39,10 +41,8 @@ module.exports = class {
             offset: req.skip, 
             raw: true, 
             nest: true,
-            attributes: ['id','name','description'],
-            order: [
-                ['created_at','DESC']
-            ] // sequelize.literal("")
+            attributes: arrayFields,
+            order: [ arrayOrderBy ] // sequelize.literal("")
         })
         .then(results => {
             this._setDataResult(results)

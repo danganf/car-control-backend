@@ -3,10 +3,10 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class Fuel extends Model {
+  class Manufacture extends Model {
     static associate(models) {}
   }
-  Fuel.init(
+  Manufacture.init(
     {
       id: {
         primaryKey: true,
@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4
       },
       name: DataTypes.STRING,
-      description: DataTypes.STRING,
+      icon: DataTypes.STRING,
     },
     {
       sequelize,
-      tableName: "fuel",
+      tableName: "manufacture",
       createdAt: 'created_at',
       updatedAt: 'updated_at',
     }
   );
-  return Fuel;
+  return Manufacture;
 };

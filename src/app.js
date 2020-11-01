@@ -39,8 +39,9 @@ app.use(function(req, res, next) {
 
 //CARREGAR ROTAS
 app.use( '/', require('./routes/index') )
-app.group("/api/v1", (router) => {
+app.group("/v1", (router) => {
     router.use( '/fuel' , require('./routes/fuel') )
+    router.use( '/manufacture' , require('./routes/manufacture') )
 })
 
 module.exports = app
