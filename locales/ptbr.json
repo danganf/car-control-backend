@@ -18,5 +18,11 @@
     "request":{
         "ok":"Requisição executada com sucesso",
         "no":"Ocorreu um erro na requisição"
+    },
+    "validate":{
+        "error": "Existem informações incorretadas",
+        "exists": "O campo {{name}} não existe",
+        "alpha-numeric": "O campo {{name}} tem que ser alphanúmerico",
+        "length": "O campo {{name}} não está no tamanho esperado"
     }
 }

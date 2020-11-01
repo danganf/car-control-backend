@@ -7,10 +7,17 @@ class BaseController {
         return res.status(code).send({ message, data })
     }
 
-    fail(res, message, detail = [], code = 400){
+    fail(res, message, data = [], code = 400){
         message = typeof message !== 'undefined' && message !== '' ? message : res.__('request.no')
-        if(!detail){detail = []}
-        return res.status(code).send({ message, detail: [detail] })
+        let detail = []
+        if(!data){data = []}
+
+        if(typeof data === 'string'){
+            detail.push({msg: data})
+        } else {
+            detail = data
+        }
+        return res.status(code).send({ message, detail })
     }
 
     notFound(res){

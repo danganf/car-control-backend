@@ -1,6 +1,6 @@
 "use restrict";
 
-const repository = require('~repo/fuel-repository');
+const repository = require('~repo/fuel.repository');
 const control = require('~control/contract/base.controller');
 
 class FuelController {
