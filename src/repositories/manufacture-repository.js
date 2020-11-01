@@ -11,7 +11,7 @@ class ManufactureRepository extends BaseRepository {
     
     /**
      * 
-     * @param Array arrayData
+     * @param {array} arrayData
      * @return string | boolean
      */
     async create(arrayData) {
@@ -31,8 +31,8 @@ class ManufactureRepository extends BaseRepository {
     }
 
     /**
-     * @param integer id 
-     * @param array arrayData 
+     * @param {integer} id 
+     * @param {array} arrayData 
      */
     async update(id, arrayData){
 
@@ -54,7 +54,7 @@ class ManufactureRepository extends BaseRepository {
     }
 
     /**
-     * @param integer id 
+     * @param {integer} id 
      */
     async delete(id){
 
@@ -76,7 +76,7 @@ class ManufactureRepository extends BaseRepository {
 
     /**
      * Overrider class BaseController
-     * @param Request req 
+     * @param {Request} req 
      */
     async getByPaginate(req){
         return super.getByPaginate(req, ['id','name','icon'])
