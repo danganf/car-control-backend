@@ -1,6 +1,10 @@
 "use restrict";
 
 class BaseController {
+
+    constructor(){
+
+    }
     
     ok(res, message, data=[], code = 200){
         message = typeof message !== 'undefined' && message !== '' && message !== null ? message : res.__('request.ok');
@@ -25,4 +29,4 @@ class BaseController {
     }
 }
 
-module.exports = new BaseController()
+module.exports = BaseController

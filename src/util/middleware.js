@@ -1,8 +1,10 @@
 'use restrict';
 
 const { validationResult } = require('express-validator')
-const control = require('~control/contract/base.controller')
+const baseController = require('~control/contract/base.controller')
 const i18n = require("i18n")
+
+const control = new baseController()
 
 const validatorRequest = (req,res,next) => { 
     let errorValidation = validationResult(req)

@@ -1,9 +1,9 @@
 "use restrict";
 
 const repository = require('~repo/type-vehicle.repository');
-const control = require('~control/contract/base.controller');
+const baseController = require('~control/contract/base.controller');
 
-class TypeVehicleController {
+class TypeVehicleController extends baseController {
     
     async get(req, res, next) {
         try{
@@ -14,10 +14,10 @@ class TypeVehicleController {
                 dataResult = await repository.getByPaginate(req)
             }
             
-            repository.isOk() ? control.ok(res, null, dataResult) : control.notFound(res)
+            repository.isOk() ? super.ok(res, null, dataResult) : super.notFound(res)
 
         } catch(e){
-            control.notFound(res)
+            super.notFound(res)
         }
     }
 
@@ -25,12 +25,12 @@ class TypeVehicleController {
         try{
             let dataResult = await repository.create(req.body);
             if( dataResult ){
-                control.ok(res, req.__('crud.create.yes'), dataResult, 201);
+                super.ok(res, req.__('crud.create.yes'), dataResult, 201);
             } else {
-                control.fail(res, req.__('crud.create.no'), repository.getMsgError());
+                super.fail(res, req.__('crud.create.no'), repository.getMsgError());
             }
         } catch(e){
-            control.fail(res, req.__('crud.create.no') );
+            super.fail(res, req.__('crud.create.no') );
         }
     }
 
@@ -38,12 +38,12 @@ class TypeVehicleController {
         try{
             let dataResult = await repository.update(req.params.id, req.body);
             if( dataResult ){
-                control.ok(res, req.__('crud.update.yes'), dataResult);
+                super.ok(res, req.__('crud.update.yes'), dataResult);
             } else {
-                control.fail(res, req.__('crud.update.no'), repository.getMsgError());
+                super.fail(res, req.__('crud.update.no'), repository.getMsgError());
             }
         } catch(e){
-            control.fail(res, req.__('crud.update.no'));
+            super.fail(res, req.__('crud.update.no'));
         }
     }
 
@@ -51,12 +51,12 @@ class TypeVehicleController {
         try{
             let dataResult = await repository.delete(req.params.id);
             if( dataResult ){
-                control.ok(res, req.__('crud.delete.yes'));
+                super.ok(res, req.__('crud.delete.yes'));
             } else {
-                control.fail(res, req.__('crud.delete.no'), repository.getMsgError(), repository.getStatusCode());
+                super.fail(res, req.__('crud.delete.no'), repository.getMsgError(), repository.getStatusCode());
             }
         } catch(e){
-            control.fail(res, req.__('crud.delete.no'), repository.getStatusCode()); 
+            super.fail(res, req.__('crud.delete.no'), repository.getStatusCode()); 
         }
     }
 
