@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.STRING(30),
         unique: true,
       },
+      unity: {
+        allowNull: false,
+        type: Sequelize.STRING(20),
+      },
       description: {
         allowNull: true,
         type: Sequelize.STRING(80),

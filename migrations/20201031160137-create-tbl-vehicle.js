@@ -32,14 +32,6 @@ module.exports = {
                 key: 'id'
             }
 		},
-		fuel_id: {
-			allowNull: false,
-			type: Sequelize.UUID,
-			references: {
-                model: 'fuel',
-                key: 'id'
-            }
-		},
 		template: {
 			allowNull: true,
 			type: Sequelize.STRING(50),

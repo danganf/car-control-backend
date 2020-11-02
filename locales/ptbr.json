@@ -13,7 +13,7 @@
             "no":"Ocorreu um erro ao deletar um registro"
         },
 		"save":"Registro salvo com sucesso",
-		"not_found":"Registro não encontrado"
+		"not_found":"Nenhum registro encontrado"
 	},
     "request":{
         "ok":"Requisição executada com sucesso",
@@ -25,6 +25,7 @@
         "exists": "O campo {{name}} não existe",
         "alpha-numeric": "O campo {{name}} tem que ser alphanúmerico",
         "length": "O campo {{name}} não está no tamanho esperado",
-        "integer": "O campo {{name}} deve ser um valor inteiro"
+        "integer": "O campo {{name}} deve ser um valor inteiro",
+        "uid": "O campo {{name}} deve ser com padrão UID"
     }
 }

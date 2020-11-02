@@ -43,6 +43,7 @@ app.group("/v1", (router) => {
     router.use( '/fuel' , require('./routes/fuel') )
     router.use( '/manufacture' , require('./routes/manufacture') )
     router.use( '/type-vehicle' , require('./routes/type-vehicle') )
+    router.use( '/vehicle' , require('./routes/vehicle') )
 })
 
 module.exports = app
