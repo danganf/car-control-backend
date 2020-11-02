@@ -17,7 +17,12 @@ class BaseController {
         if(!data){data = []}
 
         if(typeof data === 'string'){
-            detail.push({msg: data})
+            data = [data]
+        }
+        if(_.isArray(data)){
+            data.forEach( e => {
+                detail.push({msg: e}) 
+            } )
         } else {
             detail = data
         }

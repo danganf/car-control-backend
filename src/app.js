@@ -20,6 +20,10 @@ i18n.configure({
 
 app.use(i18n.init)
 
+if (!global._){
+    global._ = require('underscore');
+  }
+
 // keep this before all routes that will use pagination
 app.use(paginate.middleware(20, 50))
 

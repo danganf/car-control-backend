@@ -2,6 +2,10 @@
 
 const {Vehicle} = require('~models');
 const BaseRepository = require('~repo/contract/base.repository');
+const UserRepository = require('~repo/user.repository');
+const TypeVehicleRepository = require('~repo/type-vehicle.repository');
+const ManufactureRepository = require('~repo/manufacture-repository');
+const i18n = require("i18n")
 
 class VehicleRepository extends BaseRepository {
 
@@ -11,23 +15,54 @@ class VehicleRepository extends BaseRepository {
     
     /**
      * 
-     * @param Array arrayData
+     * @param {object} objectJson
+     * @param {string} id
      * @return string | boolean
      */
-    async create(arrayData) {
+    async createOrUpdate(objectJson, id=null) {
 
-        const { name, description } = arrayData
+        const { user_id, type_id, manufacture_id } = objectJson
+        const dataError = []
+
+        let total = await UserRepository.count(user_id)
+        if(total === 0)
+            dataError.push(i18n.__('register_notfound_param',{i: 'user_id'}))
+
+        total = await TypeVehicleRepository.count(type_id)
+        if(total === 0)
+            dataError.push(i18n.__('register_notfound_param',{i: 'type_id'}))
+        
+        total = await ManufactureRepository.count(manufacture_id)
+        if(total === 0)
+            dataError.push(i18n.__('register_notfound_param',{i: 'manufacture_id'}))
+
+        console.log(objectJson.fuels)
+
+        // objectJson.fuels.foreach(fuel => {
+        //     console.log(fuel)
+        // })    
+
+        if( dataError.length>0 )
+            return this.setMsgError(dataError)
+
+        try{
+            
+            //const result = await this.getModel().create(_.omit(objectJson,'fuels'))
+            console.log('aaaa', result)
+        } catch(err){
+            this.setMsgError(err.parent.code)
+        }
     
-        return this.getModel().create({name, description})
-        .then(
-            (reg) => {
-                return {id: reg.id};
-            }
-        )
-        .catch((err) => {
-            this.setMsgError(err.errors[0].message);
-            return false;
-        })
+        // return await this.getModel().create({name, description})
+        // .then(
+        //     (reg) => {
+        //         return {id: reg.id};
+        //     }
+        // )
+        // .catch((err) => {
+        //     this.setMsgError(err.errors[0].message);
+        //     return false;
+        // })
     }
 
     /**

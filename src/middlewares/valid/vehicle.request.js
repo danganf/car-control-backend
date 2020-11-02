@@ -23,10 +23,10 @@ exports.verify = [
     .isUUID().withMessage(i18n.__('validate.uid', {name: 'manufacture_id'}))
     .trim(),
     
-    body('fuel_id')
-    .exists().withMessage(i18n.__('validate.exists', {name: 'fuel_id'}))
-    .notEmpty().withMessage(i18n.__('validate.not-empty', {name: 'fuel_id'}))
-    .isUUID().withMessage(i18n.__('validate.uid', {name: 'fuel_id'}))
+    body('fuels')
+    .exists().withMessage(i18n.__('validate.exists', {name: 'fuels'}))
+    .notEmpty().withMessage(i18n.__('validate.not-empty', {name: 'fuels'}))
+    .isArray({min:1}).withMessage(i18n.__('validate.array', {name: 'fuels'}))
     .trim(),
     
     body('template').exists().withMessage(i18n.__('validate.exists', {name: 'template'})).trim(),

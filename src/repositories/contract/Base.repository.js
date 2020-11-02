@@ -2,6 +2,7 @@
 
 const {FORMAT_RESUL,formatPaginate} = require('~/util/paginate');
 const i18n = require("i18n")
+const sequelize = require("sequelize")
 
 module.exports = class {
 
@@ -11,6 +12,7 @@ module.exports = class {
         this._statusCodeError = 400
         this._dataResult = []
         this.isEmpty = true
+        this._orm = sequelize
     }
 
     getModel(){
@@ -22,14 +24,26 @@ module.exports = class {
         return this
     }
 
-    async getById(id) {
-        let data = await this.getModel().findOne({where: {id}})
+    async count(id) {
+        return await this.getModel().count({
+            where: this._orm.literal(`id = '${id}'`)
+        })
+    }
+    
+    async getById(id, attributes=[]) {
+        let search = {where: {id}}
+        
+        if( _.isArray(attributes) && !_.isEmpty(attributes) ){
+           search.attributes = attributes
+        }
+
+        let data = await this.getModel().findOne(search)
         if( !data ){data = []}
         this._setDataResult(data)
         return data
     }
     
-    async getByPaginate(req, arrayFields,arrayOrderBy) {
+    async getByPaginate(req, arrayFields, arrayOrderBy) {
 
         arrayOrderBy = arrayOrderBy || ['created_at','DESC']
 

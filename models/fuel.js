@@ -23,5 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       updatedAt: 'updated_at',
     }
   );
+  Fuel.associate = function(models) {
+    Fuel.belongsToMany(models.Vehicle, {through: 'VehicleFuel', foreignKey: 'vehicle_id', as: 'vehicles'})
+  };
   return Fuel;
 };

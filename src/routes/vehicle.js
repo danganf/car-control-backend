@@ -3,9 +3,10 @@
 const express = require('express')
 const router = express.Router()
 const controller = require('~control/vehicle.controller')
+const valid = require('~/middlewares/valid/vehicle.request')
 
 router.get('/:id?', controller.get )
-router.post('/', controller.create )
+router.post('/', valid.verify, controller.create )
 router.put('/:id', controller.update )
 router.delete('/:id', controller.delete )
 

@@ -23,7 +23,7 @@ class VehicleController extends baseController {
 
     async create(req, res, next) {
         try{
-            let dataResult = await repository.create(req.body);
+            const dataResult = await repository.createOrUpdate(req.body);
             if( dataResult ){
                 super.ok(res, req.__('crud.create.yes'), dataResult, 201);
             } else {

@@ -26,6 +26,8 @@
         "alpha-numeric": "O campo {{name}} tem que ser alphanúmerico",
         "length": "O campo {{name}} não está no tamanho esperado",
         "integer": "O campo {{name}} deve ser um valor inteiro",
-        "uid": "O campo {{name}} deve ser com padrão UID"
-    }
+        "uid": "O campo {{name}} deve ser com padrão UID",
+        "array": "O campo {{name}} deve ser um array com pelo menos 1 valor"
+    },
+    "register_notfound_param": "Nenhum registro encontrado com o parametro {{i}}"
 }
