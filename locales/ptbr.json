@@ -1,33 +1,34 @@
 {
 	"crud": {
-		"create":{
-            "yes":"Registro criado com sucesso",
-            "no":"Ocorreu um erro ao criar um registro"
-        },
-        "update":{
-            "yes":"Registro atualizado com sucesso",
-            "no":"Ocorreu um erro ao criar um registro"
-        },
-        "delete":{
-            "yes":"Registro deletado com sucesso",
-            "no":"Ocorreu um erro ao deletar um registro"
-        },
-		"save":"Registro salvo com sucesso",
-		"not_found":"Nenhum registro encontrado"
+		"create": {
+			"yes": "Registro criado com sucesso",
+			"no": "Ocorreu um erro ao criar um registro"
+		},
+		"update": {
+			"yes": "Registro atualizado com sucesso",
+			"no": "Ocorreu um erro ao criar um registro"
+		},
+		"delete": {
+			"yes": "Registro deletado com sucesso",
+			"no": "Ocorreu um erro ao deletar um registro"
+		},
+		"save": "Registro salvo com sucesso",
+		"not_found": "Nenhum registro encontrado",
+		"fuels_not_found": "Alguns combustiveis informados são inválidos"
 	},
-    "request":{
-        "ok":"Requisição executada com sucesso",
-        "no":"Ocorreu um erro na requisição"
-    },
-    "validate":{
-        "error": "Existem informações incorretadas",
-        "not-empty": "O campo {{name}} esta em branco",
-        "exists": "O campo {{name}} não existe",
-        "alpha-numeric": "O campo {{name}} tem que ser alphanúmerico",
-        "length": "O campo {{name}} não está no tamanho esperado",
-        "integer": "O campo {{name}} deve ser um valor inteiro",
-        "uid": "O campo {{name}} deve ser com padrão UID",
-        "array": "O campo {{name}} deve ser um array com pelo menos 1 valor"
-    },
-    "register_notfound_param": "Nenhum registro encontrado com o parametro {{i}}"
+	"request": {
+		"ok": "Requisição executada com sucesso",
+		"no": "Ocorreu um erro na requisição"
+	},
+	"validate": {
+		"error": "Existem informações incorretadas",
+		"not-empty": "O campo {{name}} esta em branco",
+		"exists": "O campo {{name}} não existe",
+		"alpha-numeric": "O campo {{name}} tem que ser alphanúmerico",
+		"length": "O campo {{name}} não está no tamanho esperado",
+		"integer": "O campo {{name}} deve ser um valor inteiro",
+		"uid": "O campo {{name}} deve ser com padrão UID",
+		"array": "O campo {{name}} deve ser um array com pelo menos 1 valor"
+	},
+	"register_notfound_param": "Nenhum registro encontrado com o parametro {{i}}"
 }

@@ -26,8 +26,7 @@ exports.verify = [
     body('fuels')
     .exists().withMessage(i18n.__('validate.exists', {name: 'fuels'}))
     .notEmpty().withMessage(i18n.__('validate.not-empty', {name: 'fuels'}))
-    .isArray({min:1}).withMessage(i18n.__('validate.array', {name: 'fuels'}))
-    .trim(),
+    .isArray({min:1}).withMessage(i18n.__('validate.array', {name: 'fuels'})),
     
     body('template').exists().withMessage(i18n.__('validate.exists', {name: 'template'})).trim(),
     body('year').exists().withMessage(i18n.__('validate.exists', {name: 'year'})).trim(),

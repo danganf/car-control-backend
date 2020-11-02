@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Fuel.associate = function(models) {
-    Fuel.belongsToMany(models.Vehicle, {through: 'VehicleFuel', foreignKey: 'vehicle_id', as: 'vehicles'})
+    Fuel.belongsToMany(models.Vehicle, {through: 'VehicleFuel', as: 'vehicles'})
   };
   return Fuel;
 };
