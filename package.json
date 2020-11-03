@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "link-module-alias",
-    "preinstall": "command -v link-module-alias && link-module-alias clean || true",
     "start": "node ./bin/server.js",
-    "watch": "set PORT=3001 && npm run postinstall && nodemon ./bin/server.js"
+    "watch": "set PORT=3001 && npm run postinstall && nodemon ./bin/server.js",
+    "prod": "node ./dist/api.bundle.js",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "express-group-routes": "^1.1.0",
     "express-paginate": "^1.0.2",
     "express-validator": "^6.6.1",
+    "glob": "^7.1.6",
     "http": "0.0.1-security",
     "i18n": "^0.13.2",
     "link-module-alias": "^1.2.0",
@@ -28,11 +30,14 @@
     "sequelize": "^6.3.5",
     "sqlite3": "^5.0.0",
     "underscore": "^1.11.0",
-    "uuid": "^8.3.1"
+    "uuid": "^8.3.1",
+    "webpack-node-externals": "^2.5.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.1.0"
   },
   "_moduleAliases": {
     "~control": "./src/controllers",

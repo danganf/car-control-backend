@@ -12,6 +12,6 @@
   "production": {
     "database": "car_control",
     "dialect": "mysql",
-    "storage": "./db/database.sqlite3"
+    "storage": "./db/database-prod.sqlite3"
   }
 }
