@@ -18,7 +18,8 @@ module.exports = {
 			primaryKey: true,
 			references: {
                 model: 'vehicle',
-                key: 'id'
+				key: 'id',
+				onDelete: 'CASCADE'
             }
 		},
 		size: {
