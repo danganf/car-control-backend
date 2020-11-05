@@ -7,7 +7,7 @@ const valid = require('~/middlewares/valid/vehicle.request')
 
 router.get('/:id?', controller.get )
 router.post('/', valid.verify, controller.create )
-router.put('/:id', controller.update )
+router.put('/:id', valid.verify, controller.update )
 router.delete('/:id', controller.delete )
 
 module.exports = router

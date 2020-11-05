@@ -36,14 +36,15 @@ class VehicleController extends baseController {
 
     async update(req, res, next) {
         try{
-            let dataResult = await repository.update(req.params.id, req.body);
+            let dataResult = await repository.createOrUpdate(req.body,req.params.id)
             if( dataResult ){
                 super.ok(res, req.__('crud.update.yes'), dataResult);
             } else {
                 super.fail(res, req.__('crud.update.no'), repository.getMsgError());
             }
         } catch(e){
-            super.fail(res, req.__('crud.update.no'));
+            console.log(e)
+            super.fail(res, req.__('crud.update.no'),e.message);
         }
     }
 

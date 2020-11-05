@@ -1,6 +1,6 @@
 "use restrict";
 
-const {Vehicle} = require('~models');
+const {Vehicle, VehicleFuel} = require('~models');
 const BaseRepository = require('~repo/contract/base.repository');
 const UserRepository = require('~repo/user.repository');
 const TypeVehicleRepository = require('~repo/type-vehicle.repository');
@@ -24,6 +24,14 @@ class VehicleRepository extends BaseRepository {
 
         const { user_id, type_id, manufacture_id } = objectJson
         const dataError = []
+
+        if(id){
+            await this.getById(id)
+            if(!this.isOk()){
+                this.setNotFound()
+                this.setThrow()
+            }
+        }
 
         //VALID USER
         let total = await UserRepository.count(user_id)
@@ -61,11 +69,22 @@ class VehicleRepository extends BaseRepository {
             return this.setMsgError(dataError)
 
         try{
-            const vehicle = await this.getModel().create(_.omit(objectJson,'fuels'));
-            if( !vehicle ){
-                return this.setMsgError(i18n.__('crud.create.no'))
+            let vehicle = {}
+            if(!id){
+                vehicle = await this.create(_.omit(objectJson,'fuels'))
+            } else {
+                vehicle = await this.update(_.omit(objectJson,'fuels'))
             }
-            
+            if( !vehicle ){
+                return this.setMsgError(
+                    !id ? i18n.__('crud.create.no') : i18n.__('crud.update.no')
+                )
+            }
+
+            if(id){
+                VehicleFuel.destroy({where: {vehicle_id: vehicle.id}})
+            }
+            //VER PARA CRIAR UM SYNC PARA M:N
             let flag = true
             promises = Object.values(dataFuel).map(async(fuel) => {
                 const result = await vehicle.addFuels(fuel.model, { 
@@ -81,36 +100,14 @@ class VehicleRepository extends BaseRepository {
             if(flag){
                 return {id: vehicle.id}
             } else {
-                vehicle.destroy()
+                if(!id){
+                    vehicle.destroy()
+                }
                 return this.setMsgError(i18n.__('crud.create.no'))
             }
 
         } catch(err){
-            console.log(err)
             this.setMsgError(err.parent.code)
-        }
-    }
-
-    /**
-     * @param integer id 
-     * @param array arrayData 
-     */
-    async update(id, arrayData){
-
-        try{
-            const reg = await this.getModel().findOne({where: {id}});
-            if( !reg ){
-                return this.setNotFound();
-            }
-
-            const { name, description } = arrayData
-            return reg.update({ name, description })
-                    .then((c) => { return c })
-                    .catch((err) => { return this.setMsgError(err.errors[0].message) })
-
-
-        } catch(e){            
-            return this.setMsgError(err.errors[0].message);
         }
     }
 

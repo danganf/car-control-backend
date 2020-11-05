@@ -15,13 +15,16 @@ module.exports = class {
         this._orm = sequelize
     }
 
-    getModel(){
-        return this._model
+    get(key){
+        try{
+            return this._dataResult.getDataValue(key)
+        } catch(err){
+            return null
+        }
     }
 
-    forceModel(model){
-        this._model = model
-        return this
+    getModel(){
+        return this._model
     }
 
     async count(id) {
@@ -38,8 +41,11 @@ module.exports = class {
         }
 
         let data = await this.getModel().findOne(search)
-        if( !data ){data = []}
-        this._setDataResult(data)
+        if( data ){
+            this._setDataResult(data)
+        } else {
+            data = []
+        }
         return data
     }
     
@@ -92,6 +98,12 @@ module.exports = class {
         return false
     }
 
+    setThrow(msg){
+        msg = typeof msg !== 'undefined' ? msg : this.getMsgError()
+        msg = msg ? msg : i18n.__('register_notfound_param')
+        throw new Error(msg)
+    }
+
     setNotFound(){
         this._msgError = i18n.__('crud.not_found')
         this._statusCodeError = 404
@@ -103,6 +115,14 @@ module.exports = class {
 
     getStatusCode(){
         return this._statusCodeError
+    }
+
+    async create(objectValues){
+        return await this.getModel().create(objectValues)
+    }
+
+    async update(objectValues){
+        return await this._dataResult.update(objectValues)
     }
 
 };

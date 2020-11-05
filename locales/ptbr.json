@@ -2,15 +2,15 @@
 	"crud": {
 		"create": {
 			"yes": "Registro criado com sucesso",
-			"no": "Ocorreu um erro ao criar um registro"
+			"no": "Ocorreu um erro ao criar o registro"
 		},
 		"update": {
 			"yes": "Registro atualizado com sucesso",
-			"no": "Ocorreu um erro ao criar um registro"
+			"no": "Ocorreu um erro ao atualizar o registro"
 		},
 		"delete": {
 			"yes": "Registro deletado com sucesso",
-			"no": "Ocorreu um erro ao deletar um registro"
+			"no": "Ocorreu um erro ao deletar o registro"
 		},
 		"save": "Registro salvo com sucesso",
 		"not_found": "Nenhum registro encontrado",
