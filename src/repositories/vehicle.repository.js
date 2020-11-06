@@ -1,11 +1,11 @@
 "use restrict";
 
-const {Vehicle, VehicleFuel} = require('~models');
-const BaseRepository = require('~repo/contract/base.repository');
-const UserRepository = require('~repo/user.repository');
-const TypeVehicleRepository = require('~repo/type-vehicle.repository');
-const ManufactureRepository = require('~repo/manufacture-repository');
-const FuelRepository = require('~repo/fuel.repository');
+const {Vehicle, VehicleFuel, sequelize} = require('~models')
+const BaseRepository = require('~repo/contract/base.repository')
+const UserRepository = require('~repo/user.repository')
+const TypeVehicleRepository = require('~repo/type-vehicle.repository')
+const ManufactureRepository = require('~repo/manufacture-repository')
+const FuelRepository = require('~repo/fuel.repository')
 const i18n = require("i18n")
 
 class VehicleRepository extends BaseRepository {
@@ -54,7 +54,7 @@ class VehicleRepository extends BaseRepository {
             const {id,size} = fuel
             if(id){
                 const data = await FuelRepository.getById(id)
-                if(data){
+                if(FuelRepository.isOk()){
                     dataFuel.push({model: data, size})
                 }
             }
@@ -117,17 +117,13 @@ class VehicleRepository extends BaseRepository {
     async delete(id){
 
         try{
-            const reg = await this.getModel().findOne({where: {id}});
-            if( !reg ){
-                return this.setNotFound()
-            }
-
-            return reg.destroy()
-                    .then((d) => true)
-                    .catch((err) => { return this.setMsgError(err.errors[0].message) })
-
-
-        } catch(e){            
+            const model = this.getModel()
+            await sequelize.transaction( async (t) => {
+                await VehicleFuel.destroy({where: {vehicle_id: id}, transaction: t});
+                return await model.destroy({where: {id}, transaction: t});
+            });
+            return true
+        } catch(err){
             return this.setMsgError(err.errors[0].message)
         }
     }

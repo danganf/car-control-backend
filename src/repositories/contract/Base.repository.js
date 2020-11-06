@@ -27,6 +27,10 @@ module.exports = class {
         return this._model
     }
 
+    getOrm(){
+        return this._orm
+    }
+
     async count(id) {
         return await this.getModel().count({
             where: this._orm.literal(`id = '${id}'`)
