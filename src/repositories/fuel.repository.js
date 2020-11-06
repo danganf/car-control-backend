@@ -16,9 +16,9 @@ class FuelRepository extends BaseRepository {
      */
     async create(arrayData) {
 
-        const { name, description } = arrayData
+        const { name, unity, description } = arrayData
     
-        return this.getModel().create({name, description})
+        return this.getModel().create({name, unity, description})
         .then(
             (reg) => {
                 return {id: reg.id};
@@ -41,12 +41,10 @@ class FuelRepository extends BaseRepository {
             if( !reg ){
                 return this.setNotFound();
             }
-
-            const { name, description } = arrayData
-            return reg.update({ name, description })
+            const { name, unity, description } = arrayData
+            return reg.update({ name, unity, description })
                     .then((c) => { return c })
                     .catch((err) => { return this.setMsgError(err.errors[0].message) })
-
 
         } catch(e){            
             return this.setMsgError(err.errors[0].message);
