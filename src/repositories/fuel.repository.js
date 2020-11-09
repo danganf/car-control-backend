@@ -77,7 +77,7 @@ class FuelRepository extends BaseRepository {
      * @param Request req 
      */
     async getByPaginate(req){
-        return super.getByPaginate(req, ['id','name','description'])
+        return super.getByPaginate(req, ['id','name','description','unity'])
     }
 }
 
