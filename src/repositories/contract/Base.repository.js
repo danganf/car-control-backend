@@ -55,7 +55,7 @@ module.exports = class {
     
     async getByPaginate(req, arrayFields, arrayOrderBy) {
 
-        arrayOrderBy = arrayOrderBy || ['created_at','DESC']
+        arrayOrderBy = arrayOrderBy || ['created_at']
 
         this._setDataResult(FORMAT_RESUL)
         let limit = req.query.limit
